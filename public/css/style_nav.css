@@ -1,0 +1,77 @@
+
+/*sitewide*/
+.navbar {
+	margin-bottom:-55px;
+}
+.nav-bit {
+
+	margin:0 5px 20px 5px;
+	background-color: #ffccff;
+	padding:10px 20px;
+	border-radius: 10px;
+	-webkit-transition: all .7s ease;
+	-moz-transition: all .7s ease;
+	-o-transition: all .7s ease;
+	transition: all .7s ease;
+}
+
+.nav-bit:hover {
+
+	background-color: #ffaaff;
+	transition: all .7s ease;
+}
+.nav {
+
+	padding:0;
+}
+.nav a {
+	text-decoration: none;
+}
+
+#menubars {
+	display:none;
+	margin:0 10px 20px 10px;
+	background-color: #ffccff;
+	padding:10px 20px;
+	border-radius: 10px;
+}
+
+/*For smaller screens*/
+@media screen and (max-width: 1130px) {
+    .nav a {display: none;}
+	#menubars {
+		position:absolute;
+		display: flex;
+	   right:0;
+	   z-index:9;
+	   text-decoration: none;
+	}
+
+  .nav.responsive {
+
+  	position:absolute;
+	flex-direction:column;
+  	right:10px;
+  	top:30px;
+  	background-color:#ffccff;
+  	margin:0;
+  	padding:10px;
+  	padding-top:50px;
+  	border-radius: 10px;
+  	z-index: 1;
+	transition: all .7s ease;
+  }
+  .nav.responsive a {
+    float: none;
+    display: block;
+  }
+  .nav.responsive .nav-bit {
+    margin:0;
+    padding:10px;
+    background-color: rgb(0,0,0,0);
+  }
+  .nav.responsive .nav-bit:hover {
+    background-color: #ffaaff;
+    transition: all .7s ease;
+  }
+}
