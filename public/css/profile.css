@@ -1,9 +1,16 @@
 #profile-name {
-    text-align:left;
-
-  width:100%;
-  margin:-60px 0 0 -120px;
-  
+top:-46px;
+  left:-24px;
+  position:absolute;
 }
+/*For smaller screens*/
+@media screen and (max-width: 500px) {
+#profile-name {
+top:-46px;
+  left:initial;
+  position:absolute;
+}
+}
+
 
       

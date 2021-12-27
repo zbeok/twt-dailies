@@ -1,7 +1,16 @@
 <link rel="stylesheet" href="css/profile.css" />
 <div class="content">
-<h1 id="profile-name">
-  {{ username }}
+  <h1 id="profile-name">
+    {{ username }}
   </h1>
-  
+    <div ng-show="current_user" class="blockquote">
+      <h3>
+        yr stats rn lol
+      </h3>
+      <p>
+        {{ current_user.stats }}
+      </p>
+    </div>
+  <div ng-show="current_user" class="divider"></div>
+  <p>{{ user_profile }}</p>
 </div>

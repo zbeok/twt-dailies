@@ -1,37 +1,23 @@
 <link rel="stylesheet" href="css/home.css" />
-<div class="content" id="login">
-    
+<div class="content">
   <h1 class="title">
     ❤️twitter is hell❤️
   </h1>
-  <p class="subtitle">
-    a game lovingly hand-crafted by snerkflerks  <br>
-    for people who hate twitter have to use it, <br>
-    or maybe people who like shitty phone games
-  </p>
-  <form>
-    <input id="username"  placeholder="username"/>
-    <input id="password"  placeholder="passsword"/>
-    
-    <input type="button" ng-click="login()" value="login" />
-  </form>
-  <p>
-    don't have an account yet? register <a href="/register">here</a>
-  </p>
-</div>
-<div class="content" id="homepage">
-    
-  <h1 class="title">
-    ❤️ twitter is hell ❤️
-  </h1>
-  <p class="subtitle">
-    a game lovingly hand-crafted by snerkflerks  <br>
-    for people who hate twitter have to use it, <br>
-    or maybe people who like shitty phone games
-  </p>
-  <div class="news">
-    <p>
-      Welcome <a href="/profile/{{$storage.user.name}}">{{ $storage.user.name }}</a>!
+  <div class="body">
+    <p class="subtitle">
+      tool-games lovingly hand-crafted by yrs truly <br />
+      for entities who hate twitter + have to use it, <br />
+      or maybe people who like those <br />
+      shitty clicker phone games
     </p>
+    <button ng-show="!current_user" ng-click="login();">enter da zone</button>
+    <div ng-show="current_user" class="news ">
+      <p>
+        Welcome
+        <a ng-href="/profile/{{current_user.twtdata.username}}"
+          >{{ current_user.twtdata.username }}</a
+        >!
+      </p>
+    </div>
   </div>
 </div>

@@ -38,6 +38,16 @@ function nuke_users(){
       }
     });
 }
+function all_users(){
+   
+    $.ajax({
+      url: "/test/users",
+      type: "GET",
+      success: function(result) {
+        print(result);
+      }
+    });
+}
 function nuke_storage(){
   localStorage.clear();
 }

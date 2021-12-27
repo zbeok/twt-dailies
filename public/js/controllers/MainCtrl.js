@@ -1,65 +1,43 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope,$window,$localStorage,$sessionStorage) {
-  
-  
-  $scope.init = function () {
-    
-    $scope.$storage = $localStorage.$default({
-      user:null
-    });
-  }
-  $scope.init();
-  
-	$scope.login = function() {
-    var user_input = document.getElementById('username');
-    var pass_input = document.getElementById('password');
-    $.ajax({
-      url: "/login",
-      type: "PUT",
-      data:{name:user_input.value,pass:pass_input.value},
-      success: function(result) {
-        $scope.$storage.user=result;
-        $scope.$evalAsync(function(){
-          $window.open("/profile/"+result.name, "_self");
+angular
+  .module("MainCtrl", [])
+  .controller("MainController", function(
+    $scope,
+    $window,
+    AuthService,
+    $http
+  ) {
+
+    $scope.user_check = async function(username = null) {
+      return $http
+        .get("/users?username=" + username)
+        .then(function(res) {
+          return res.data;
+        })
+        .catch(function(error) {
+          console.log("Couldn't find user in my deeby with that username");
+          return null;
         });
-      },
-      error: function(data, textStatus, xhr){
-        $window.alert("epic fail, try again?");
-      }
-    });
-  }
-	$scope.register = function() {
-    var user_input = document.getElementById('username');
-    var pass_input = document.getElementById('password');
-    $.ajax({
-      url: "/register",
-      type: "POST",
-      data:{name:user_input.value,pass:pass_input.value},
-      success: function(result) {
-        $scope.$storage.user=result;
-        $window.open("/", "_self");
-      },
-      error: function(data, textStatus, xhr){
-        $window.alert("epic fail, try again?");
-      }
-    });
-    
-  }
-  $scope.logout = function () {
-    $scope.$storage.$reset();
-  }
-  
-  $scope.user_check = function (username,callback) {
-    $.ajax({
-      url: "/user?name="+username,
-      type: "GET",
-      success: function(data, textStatus, xhr) {  
-        callback(data);
-      },
-      error: function(data, textStatus, xhr){
-        callback(null);
-      }
-    });
-    
-  }
-  
-});
+    };
+
+    $scope.current_user = null;
+    $scope.set_current_user = function() {
+      return AuthService.authenticate().then(function (user) {
+        console.log("Welcome 2 the zone "+user.username);
+        $scope.current_user = user;
+        return true;
+      }).catch(function (error) {
+        throw("Error setting current user: ", error);
+      });
+    };
+
+    $scope.isAuthenticated = async function() {
+      $scope.current_user = await AuthService.isAuthenticated();
+      console.log("mainctrl isauthd", $scope.current_user);
+      $scope.$apply();
+      return $scope.current_user;      
+    };
+    $scope.logged_in = $scope.isAuthenticated();
+    $scope.login = AuthService.login;
+    $scope.logout = AuthService.logout;
+
+  });
